@@ -90,7 +90,7 @@ const setActiveClass = (characterClass: typeof classes[0]) => {
       
       <ClassItem 
         :title="activeClass.title"
-        :description="activeClass.description"
+        :description="activeClass.description || ''"
         :abilities="activeClass.abilities"
         :image-path="activeClass.imagePath"
       />
