@@ -5,23 +5,15 @@
 <template>
   <section class="section game-intention">
     <div class="container">
-      <h2 class="section-title">Original Intention of the Game</h2>
+      <h2 class="section-title">關於咪嚕谷</h2>
       <div class="intention-content">
         <div class="intention-image">
+          <img src="https://drive.google.com/thumbnail?id=19v9lFIU3x7B1gpySEhV8kJRnxARfdIuZ&sz=w1200" alt="關於咪嚕谷" class="game-image" />
           <div class="image-placeholder"></div>
         </div>
         <div class="intention-text">
           <p>
-            MiruStory was born from a vision to create a magical world where players can forge their own destiny through meaningful choices and epic adventures.
-          </p>
-          <p>
-            Our game combines the nostalgic elements of classic RPGs with modern gameplay mechanics, creating an experience that feels both familiar and fresh.
-          </p>
-          <p>
-            We wanted to build a community-focused game where players can connect, collaborate, and compete in a vibrant, ever-evolving world filled with mysteries to uncover and challenges to overcome.
-          </p>
-          <p>
-            Above all, MiruStory aims to deliver memorable moments that will stay with players long after they've logged off, creating stories worth sharing and experiences worth treasuring.
+            建置中!
           </p>
         </div>
       </div>
@@ -58,24 +50,13 @@
   line-height: 1.6;
 }
 
-.image-placeholder {
-  width: 100%;
-  height: 300px;
-  background-color: var(--primary-200);
-  border-radius: 12px;
-  margin-bottom: var(--space-2);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
 .image-placeholder::after {
-  content: "Game Concept Art";
+  content: attr(title) " 職業";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--primary-800);
+  color: var(--primary-700);
   font-weight: 600;
   font-size: 1.25rem;
 }

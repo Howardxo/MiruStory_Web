@@ -1,50 +1,66 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import ClassItem from './reusable/ClassItem.vue';
+import ClassItem from '../components/reusable/ClassItem.vue';
 
-// Class data
+// 職業資料
 const classes = [
   {
     id: 'warrior',
-    title: 'Warrior',
-    description: 'Masters of close combat, Warriors excel in wielding heavy weapons and armor. With high health and defense stats, they can withstand massive damage while dealing devastating blows to enemies.',
-    abilities: ['Whirlwind Strike', 'Battle Cry', 'Devastate', 'Shield Wall'],
-    imagePath: '/classes/warrior.jpg'
+    title: '戰士',
+    abilities: [
+    { name: '英雄', description1: '格檔 機率 90%  > 100%', description2: '鬥氣爆發 額外+26攻擊 > 150攻擊', description3: '無雙劍舞 傷害 260% > 600% 攻擊次數 2 次> 3次' },
+      { name: '聖騎士', description1: '騎士衝擊波 攻擊次數 1次 > 3次  攻擊怪物數量 1隻 > 3隻', description2: '格檔  可以提供隊友效果' },
+      { name: '黑騎士', description1: '格檔 機率 70% > 100%', description2: '槍連擊 攻擊次數4次 攻擊怪物數量5隻', description3: '矛連擊 攻擊次數4次 攻擊怪物數量5隻', description4: '黑暗力量壓血血量調整 50% > 80%' },
+    ],
+    imagePath: 'https://drive.google.com/thumbnail?id=11ebmJovuzt6MRfZOlABZdrcCnsmqtPFE&sz=w1200'
   },
   {
     id: 'mage',
-    title: 'Mage',
-    description: 'Wielders of arcane power, Mages control the elements and harness magical energy to decimate enemies from a distance. Though physically fragile, their spell damage and area-of-effect abilities are unmatched.',
-    abilities: ['Fireball', 'Frost Nova', 'Arcane Missiles', 'Teleport'],
-    imagePath: '/classes/mage.jpg'
+    title: '法師',
+    abilities: [
+      { name: '共同技能', description1: '魔利爪 攻擊傷害 40% > 110%', description2: '魔力無限 攻擊傷害+300 持續時間 40秒 > 300秒', description3: '核爆術 傷害 450% > 1200%' },
+      { name: '主教', description1: '聖光 攻擊次數 1次 > 4次', description2: '復甦之光 冷卻時間 30分鐘 > 5分鐘', description3: '天使之箭 攻擊次數 1次 > 3次  攻擊傷害 240% > 500%', description4: '神聖祈禱 持續時間調至120秒 > 600秒', description5: '聖盾護鎧 等卻時間減至120秒 > 60秒', description6: '神聖之光 可以提供隊友效果', description7: '天怒 攻擊次數 1次 > 2次' },
+      { name: '大魔導士(冰雷)', description1: '電閃雷鳴 攻擊次數 1次 > 4次', description2: '冰風暴 攻擊次數1次 > 4次', description3: '閃電連擊 攻擊傷害180% > 280% 攻擊次數 1次 > 8次', description4: '暴風雪 攻擊次數 1次 > 2次' },
+      { name: '大魔導士(火毒)', description1: '火焰箭 攻擊次數 1次 > 3次', description2: '末日烈焰 攻擊次數 1次 > 4次', description3: '劇毒麻痺 攻擊傷害 210% > 650% 攻擊次數 1次  > 3次', description4: '火流星 攻擊次數 1次 > 2次' },
+    ],
+    imagePath: 'https://drive.google.com/thumbnail?id=1Wm4xN9aQFeR8Bp5xpEXeZusgLG-UX4oK&sz=w1200'
   },
   {
     id: 'archer',
-    title: 'Archer',
-    description: 'Precision and agility define the Archer class. Masters of ranged combat, they strike enemies with deadly accuracy while maintaining a safe distance. Their critical hit chance and evasion skills make them formidable opponents.',
-    abilities: ['Piercing Shot', 'Multishot', 'Viper Sting', 'Evasive Roll'],
-    imagePath: '/classes/archer.jpg'
+    title: '弓箭手',
+    abilities: [
+      { name: '神射手', description1: '升龍弩 攻擊次數 1次 > 2次', description2: '四連箭 傷害 100% > 200%' },
+      { name: '箭神', description1: '箭雨 攻擊次數 1次 > 2次', description2: '暴風神射 傷害 100% > 160% 攻擊次數 1次 > 2次' },
+    ],
+    imagePath: 'https://drive.google.com/thumbnail?id=1wXmT6Fid6uCe1LGJ1eb2-UzQGTnmpCfC&sz=w1200'
   },
   {
     id: 'thief',
-    title: 'Thief',
-    description: 'Operating from the shadows, Thieves excel in stealth and subterfuge. Their high agility and dexterity allow them to strike critical weak points, inflicting massive damage through backstabs and poison.',
-    abilities: ['Backstab', 'Vanish', 'Poison Blade', 'Pickpocket'],
-    imagePath: '/classes/thief.jpg'
+    title: '盜賊',
+    abilities: [
+      { name: '夜使者', description1: '無形鏢 持續時間 120秒 > 300秒', description2: '三飛閃(改) 傷害 150% > 200% 攻擊次數 3次 > 5次' },
+      { name: '暗影神偷', description1: '迴旋斬 攻擊次數 6次 > 8次 、傷害 80% > 300%', description2: '煙幕彈 冷卻時間 10分鐘 > 2分鐘', description3: '瞬步連擊 攻擊次數 2次 > 3次' },
+    ],
+    imagePath: 'https://drive.google.com/thumbnail?id=16Fla_DCn7fApULeUUd21uE0kRllcnr-f&sz=w1200'
   },
   {
     id: 'pirate',
-    title: 'Pirate',
-    description: 'Masters of naval combat and treasure hunting, Pirates combine ranged and melee abilities with unique luck-based skills. Their charisma can turn the tide of battle through ally buffs and enemy debuffs.',
-    abilities: ['Cannonball Barrage', 'Treasure Hunter', 'Parley', 'Drunken Fury'],
-    imagePath: '/classes/pirate.jpg'
+    title: '海盜',
+    abilities: [
+      { name: '共同技能', description1: '部分技能延遲降低' },
+      { name: '拳霸', description1: '增加周圍友方單位攻擊力', description2: '閃．連殺 攻擊傷害 230% > 350%', description3: '閃．爆破 攻擊傷害 400% > 700%', description4: '鬥神降世 持續時間調整為120秒 > 180秒', description5: '龍神降臨 攻擊次數 1次 > 2次' },
+      { name: '槍神', description1: '海鷗特戰隊 攻擊怪物數量 6隻 > 8隻  冷卻時間 5秒 > 1秒 攻擊次數 1次 > 2次', description2: '海盜加農炮 攻擊次數 4次 > 5次' },
+
+    ],
+    imagePath: 'https://drive.google.com/thumbnail?id=1YxMATNNkoMbya9Kzlt3cO0_DtdgsErjx&sz=w1200'
   },
   {
     id: 'crazy-warrior',
-    title: 'Crazy Warrior',
-    description: 'Embracing battle frenzy and chaos, Crazy Warriors sacrifice defense for overwhelming offensive power. As they take damage, their attack speed and damage increase to devastating levels, making them unpredictable berserkers.',
-    abilities: ['Berserk', 'Blood Frenzy', 'Reckless Assault', 'Pain Threshold'],
-    imagePath: '/classes/crazy-warrior.jpg'
+    title: '狂郎勇士',
+    abilities: [
+      { name: '目前待技改' },
+    ],
+    imagePath: 'https://drive.google.com/thumbnail?id=1oegtlXo9BwGVuTzOCY1BAlvaOtXwHzd0&sz=w1200'
   }
 ];
 
@@ -58,7 +74,7 @@ const setActiveClass = (characterClass: typeof classes[0]) => {
 <template>
   <section class="section skill-adjustment">
     <div class="container">
-      <h2 class="section-title">Skill Adjustment</h2>
+      <h2 class="section-title">技能調整</h2>
       
       <div class="class-tabs">
         <button 

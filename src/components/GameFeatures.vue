@@ -6,27 +6,27 @@ import FeatureItem from './reusable/FeatureItem.vue';
 const features = [
   {
     id: 'spark-blessing',
-    title: 'Spark Blessing',
-    description: 'Enhance your character with celestial blessings that grant unique abilities and powerful buffs. Collect rare sparks from defeating legendary enemies and completing epic quests to unlock new tiers of blessings.',
-    imagePath: '/features/spark-blessing.jpg'
+    title: '星火祝福',
+    description: '將裝備放在星火上,為你的角色帶來祝福,增加裝備的能力和威力,讓你在戰鬥中成為一名強大的勇士!',
+    imagePath: 'https://drive.google.com/thumbnail?id=1pnPoIVQ8bYwlLdrtZaL1_jB_6gFv84dE&sz=w1200'
   },
   {
     id: 'equipment-enchanting',
-    title: 'Equipment Enchanting',
-    description: 'Upgrade your weapons and armor through our advanced enchanting system. Apply magical properties to increase damage, defense, or add special effects like freezing, burning, or life-stealing abilities to dominate in combat.',
-    imagePath: '/features/equipment-enchanting.jpg'
+    title: '點裝附魔',
+    description: '再點裝使用寶石的能量,增加裝備的能力和威力,讓你在戰鬥中成為一名強大的勇士!',
+    imagePath: 'https://drive.google.com/thumbnail?id=1YQNNXRmzhL6oXRuRJOAXhKz6711OzkKU&sz=w1200'
   },
   {
     id: 'equipment-synthesis',
-    title: 'Equipment Synthesis',
-    description: 'Combine multiple pieces of equipment to create powerful new items with enhanced stats and unique abilities. Discover rare recipes and gather exotic materials to craft legendary gear that will set you apart from other adventurers.',
-    imagePath: '/features/equipment-synthesis.jpg'
+    title: '騎寵覺醒',
+    description: '使用覺醒石，讓你騎寵夥伴激發出來!',
+    imagePath: 'https://drive.google.com/thumbnail?id=1jiY1_PNzxVBAtwCVQWb1n412B3dhPndd&sz=w1200'
   },
   {
     id: 'mount-awakening',
-    title: 'Mount Awakening',
-    description: 'Evolve your companions beyond their limits with the Mount Awakening system. Train and bond with your mounts to unlock their hidden potential, granting increased stats, special skills, and stunning visual transformations.',
-    imagePath: '/features/mount-awakening.jpg'
+    title: '裝備合成',
+    description: '各式裝備合成與進階，提升冒險者實力!',
+    imagePath: 'https://drive.google.com/thumbnail?id=1mLGT9EITrYfgFNom9OUxoY0ATMiSsyBh&sz=w1200'
   }
 ];
 
@@ -40,7 +40,7 @@ const setActiveFeature = (feature: typeof features[0]) => {
 <template>
   <section class="section game-features">
     <div class="container">
-      <h2 class="section-title">Game Features</h2>
+      <h2 class="section-title">特色系統</h2>
       
       <div class="features-tabs">
         <button 

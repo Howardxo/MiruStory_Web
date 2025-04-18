@@ -9,12 +9,20 @@ defineProps<{
 <template>
   <div class="feature-item">
     <div class="feature-image">
+      <img 
+        :src="imagePath" 
+        :alt="title" 
+        class="feature-img"
+        @error="(event) => { 
+          (event.target as HTMLImageElement).style.display = 'none';
+          (event.target as HTMLImageElement).parentElement!.classList.add('image-error');
+        }" 
+      />
       <div class="image-placeholder" :title="title"></div>
     </div>
     <div class="feature-content">
       <h3>{{ title }}</h3>
       <p>{{ description }}</p>
-      <button class="learn-more-btn">Learn More</button>
     </div>
   </div>
 </template>
@@ -31,27 +39,41 @@ defineProps<{
   flex: 1;
 }
 
+.feature-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
 .feature-content {
   flex: 1;
 }
 
 .image-placeholder {
+  display: none;
   width: 100%;
-  height: 250px;
-  background-color: var(--primary-800);
+  height: 100%;
+  background-color: var(--primary-100);
   border-radius: 8px;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.image-error .image-placeholder {
+  display: block;
 }
 
 .image-placeholder::after {
-  content: attr(title);
+  content: attr(title) " 職業";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--primary-200);
+  color: var(--primary-700);
   font-weight: 600;
   font-size: 1.25rem;
 }

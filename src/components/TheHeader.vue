@@ -7,9 +7,9 @@
     <div class="header-content container">
       <div class="logo">MiruStory</div>
       <div class="header-text">
-        <h1>Enter a World of Adventure</h1>
-        <p>Experience an epic journey through a magical realm where your choices shape destiny</p>
-        <button class="download-btn">Download Game</button>
+        <h1>加入我們一起來當冒險者吧!</h1>
+        <p>世界需要您的協助</p>
+        <button class="download-btn">下載遊戲</button>
       </div>
     </div>
   </header>
@@ -25,7 +25,7 @@
   justify-content: center;
   text-align: center;
   color: white;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('/header-bg.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://drive.google.com/thumbnail?id=1Xg3IKMPFENCmDQkYz3E2TBRbwQ1I41L5&sz=w1200');
   background-size: cover;
   background-position: center;
 }
