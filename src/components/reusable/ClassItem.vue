@@ -2,7 +2,7 @@
 defineProps<{
   title: string;
   description: string;
-  abilities: Array<{ name: string; description1: string; description2: string; description3: string; description4: string; description5: string; description6: string; description7: string }>;
+  abilities: Array<{ name: string; description1?: string; description2?: string; description3?: string; description4?: string; description5?: string; description6?: string; description7?: string }>;
   imagePath: string;
 }>();
 </script>
