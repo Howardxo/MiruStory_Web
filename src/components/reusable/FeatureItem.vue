@@ -8,7 +8,6 @@ defineProps<{
 
 <template>
   <div class="feature-item">
-    <div class="feature-image">
       <img 
         :src="imagePath" 
         :alt="title" 
@@ -18,8 +17,6 @@ defineProps<{
           (event.target as HTMLImageElement).parentElement!.classList.add('image-error');
         }" 
       />
-
-    </div>
     <div class="feature-content">
       <h3>{{ title }}</h3>
       <p>{{ description }}</p>
@@ -30,54 +27,18 @@ defineProps<{
 <style scoped>
 .feature-item {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-10);
+  gap: var(--space-20);
   animation: fadeIn 0.5s ease-out;
 }
 
-.feature-image {
-  flex: 3;
-}
-
 .feature-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 70%;
   border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: 28px;
 }
 
 .feature-content {
   flex: 1;
-}
-
-.image-placeholder {
-  display: none;
-  width: 100%;
-  height: 100%;
-  background-color: var(--primary-100);
-  border-radius: 8px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-}
-
-.image-error .image-placeholder {
-  display: block;
-}
-
-.image-placeholder::after {
-  content: attr(title) " 職業";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--primary-700);
-  font-weight: 600;
-  font-size: 1.25rem;
 }
 
 .feature-content h3 {
@@ -123,14 +84,30 @@ defineProps<{
 }
 
 @media (min-width: 768px) {
-  .feature-item {
-    flex-direction: row;
-    align-items: center;
+  .feature-img {
+    width: 60%;
   }
-  
-  .feature-image, 
-  .feature-content {
-    width: 48%;
+  .feature-item {
+    gap: var(--space-8);
   }
 }
+
+@media (max-width: 768px) {
+  .feature-item {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-8);
+  }
+  .feature-img {
+    width: 100%;
+  }
+
+@media (max-width: 320px) {
+  .feature-img {
+    width: 100%;
+  }
+}
+}
+
+
 </style>

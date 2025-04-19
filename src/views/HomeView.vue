@@ -29,10 +29,4 @@ main {
   flex: 1;
 }
 
-@media (min-width: 768px) {
-  .game-features {
-    height: 800px;
-  }
-}
-
 </style>

@@ -5,11 +5,11 @@
 <template>
   <header class="header">
     <div class="header-content container">
-      <div class="logo">MiruStory</div>
+      <img src="https://drive.google.com/thumbnail?id=1Ukgb-X-zEYv8stRMeVr-35BA5CfYHny7&sz=w1200" class="logo" />
       <div class="header-text">
         <h1>加入我們一起來當冒險者吧!</h1>
-        <p>世界需要您的協助</p>
-        <button class="download-btn">下載遊戲</button>
+        <p>探索這個奇幻世界!</p>
+        <button class="download-btn" onclick="window.open('https://drive.google.com/uc?export=download&id=1dhTjI67jDIm8vwdIKeIGVdzctbi6PM5d', '_blank')">下載遊戲</button>
       </div>
     </div>
   </header>
@@ -36,14 +36,13 @@
 }
 
 .logo {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: var(--space-6);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  animation: fadeInDown 1s ease-out;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 30px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header-text {

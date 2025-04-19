@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import FeatureItem from './reusable/FeatureItem.vue';
+import TransitionExpand from './TransitionExpand.vue';
 
 // Feature data
 const features = [
@@ -41,25 +42,19 @@ const setActiveFeature = (feature: typeof features[0]) => {
   <section class="section game-features">
     <div class="container">
       <h2 class="section-title">特色系統</h2>
-      
+
       <div class="features-tabs">
-        <button 
-          v-for="feature in features" 
-          :key="feature.id"
-          class="feature-tab" 
-          :class="{ active: activeFeature.id === feature.id }"
-          @click="setActiveFeature(feature)"
-        >
+        <button v-for="feature in features" :key="feature.id" class="feature-tab"
+          :class="{ active: activeFeature.id === feature.id }" @click="setActiveFeature(feature)">
           {{ feature.title }}
         </button>
       </div>
-      
-      <FeatureItem 
-        class="feature-item"
-        :title="activeFeature.title"
-        :description="activeFeature.description"
-        :image-path="activeFeature.imagePath"
-      />
+
+      <TransitionExpand>
+        <FeatureItem :key="activeFeature.id" class="feature-item" :title="activeFeature.title"
+          :description="activeFeature.description" :image-path="activeFeature.imagePath" />
+      </TransitionExpand>
+
     </div>
   </section>
 </template>
@@ -82,59 +77,93 @@ const setActiveFeature = (feature: typeof features[0]) => {
 
 .features-tabs {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-2);
   margin-bottom: var(--space-4);
+  overflow-x: auto;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--space-2);
+
+  /* Firefox 滾動條樣式 */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+
+  /* Webkit 瀏覽器滾動條樣式 (Chrome, Safari, Edge等) */
+  &::-webkit-scrollbar {
+    height: 6px;
+    /* 水平滾動條的高度 */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    /* 滾動條軌道背景透明 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    /* 淺灰色半透明滑塊 */
+    border-radius: 6px;
+    /* 圓角滑塊 */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    /* 懸停時稍微深一點 */
+  }
+}
+
+/* 隱藏滾動條但保留功能 (對於 Webkit 瀏覽器) */
+.features-tabs::-webkit-scrollbar {
+  height: 4px;
+  /* 滾動條高度 */
+}
+
+.features-tabs::-webkit-scrollbar-thumb {
+  background-color: var(--primary-600);
+  /* 滾動條顏色 */
+  border-radius: 4px;
 }
 
 .feature-tab {
-  background-color: transparent;
-  color: var(--neutral-300);
-  border: 1px solid var(--neutral-600);
-  padding: var(--space-1) var(--space-2);
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.feature-tab:hover {
-  background-color: var(--primary-700);
-  color: white;
-  border-color: var(--primary-600);
-}
-
-.feature-tab.active {
-  background-color: var(--primary-600);
-  color: white;
-  border-color: var(--primary-500);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* 保持您現有的樣式 */
+  flex: 0 0 auto;
+  /* 防止按鈕被壓縮 */
 }
 
 
 @media (max-width: 768px) {
   .features-tabs {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .feature-tab {
+    justify-content: flex-start;
+    /* 在行動裝置上從左開始排列 */
     width: 100%;
-    max-width: 300px;
+    /* 確保寬度為 100% */
+  }
+
+  .feature-tab {
+    width: 100px;
+    /* 自動寬度而非 100% */
+    max-width: none;
+    /* 移除最大寬度限制 */
     text-align: center;
   }
 }
 
 @media (min-width: 768px) {
+  .features-tabs {
+    justify-content: center;
+    /* 在行動裝置上從左開始排列 */
+  }
+
   .feature-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .game-features {
+    height: auto;
+  }
 }
 </style>

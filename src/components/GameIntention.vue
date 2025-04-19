@@ -64,7 +64,7 @@
 }
 
 .image-placeholder::after {
-  content: attr(title) " 職業";
+  content: attr(title);
   position: absolute;
   top: 50%;
   left: 50%;

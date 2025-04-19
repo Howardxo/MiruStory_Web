@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import ClassItem from '../components/reusable/ClassItem.vue';
+import TransitionExpand from '../components/TransitionExpand.vue';
 
 // 職業資料
 const classes = [
@@ -9,7 +10,7 @@ const classes = [
     title: '英雄',
     description: '',
     abilities: [
-    { name: '英雄', description1: '格檔 機率 90%  > 100%', description2: '鬥氣爆發 額外+26攻擊 > 150攻擊', description3: '無雙劍舞 傷害 260% > 600% 攻擊次數 2 次> 3次' },
+      { name: '職業技能', description1: '格檔 機率 90%  > 100%', description2: '鬥氣爆發 額外+26攻擊 > 150攻擊', description3: '無雙劍舞 傷害 260% > 600% 攻擊次數 2 次> 3次' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=11ebmJovuzt6MRfZOlABZdrcCnsmqtPFE&sz=w1200'
   },
@@ -18,7 +19,7 @@ const classes = [
     title: '聖騎士',
     description: '',
     abilities: [
-      { name: '聖騎士', description1: '騎士衝擊波 攻擊次數 1次 > 3次  攻擊怪物數量 1隻 > 3隻', description2: '格檔  可以提供隊友效果' },
+      { name: '職業技能', description1: '騎士衝擊波 攻擊次數 1次 > 3次  攻擊怪物數量 1隻 > 3隻', description2: '格檔  可以提供隊友效果' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=11ebmJovuzt6MRfZOlABZdrcCnsmqtPFE&sz=w1200'
   },
@@ -27,7 +28,7 @@ const classes = [
     title: '黑騎士',
     description: '',
     abilities: [
-      { name: '黑騎士', description1: '格檔 機率 70% > 100%', description2: '槍連擊 攻擊次數4次 攻擊怪物數量5隻', description3: '矛連擊 攻擊次數4次 攻擊怪物數量5隻', description4: '黑暗力量壓血血量調整 50% > 80%' },
+      { name: '職業技能', description1: '格檔 機率 70% > 100%', description2: '槍連擊 攻擊次數4次 攻擊怪物數量5隻', description3: '矛連擊 攻擊次數4次 攻擊怪物數量5隻', description4: '黑暗力量壓血血量調整 50% > 80%' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=11ebmJovuzt6MRfZOlABZdrcCnsmqtPFE&sz=w1200'
   },
@@ -37,7 +38,7 @@ const classes = [
     description: '',
     abilities: [
       { name: '法師共同技能', description1: '魔利爪 攻擊傷害 40% > 110%', description2: '魔力無限 攻擊傷害+300 持續時間 40秒 > 300秒', description3: '核爆術 傷害 450% > 1200%' },
-      { name: '主教', description1: '聖光 攻擊次數 1次 > 4次', description2: '復甦之光 冷卻時間 30分鐘 > 5分鐘', description3: '天使之箭 攻擊次數 1次 > 3次  攻擊傷害 240% > 500%', description4: '神聖祈禱 持續時間調至120秒 > 600秒', description5: '聖盾護鎧 等卻時間減至120秒 > 60秒', description6: '神聖之光 可以提供隊友效果', description7: '天怒 攻擊次數 1次 > 2次' },
+      { name: '職業技能', description1: '聖光 攻擊次數 1次 > 4次', description2: '復甦之光 冷卻時間 30分鐘 > 5分鐘', description3: '天使之箭 攻擊次數 1次 > 3次  攻擊傷害 240% > 500%', description4: '神聖祈禱 持續時間調至120秒 > 600秒', description5: '聖盾護鎧 等卻時間減至120秒 > 60秒', description6: '神聖之光 可以提供隊友效果', description7: '天怒 攻擊次數 1次 > 2次' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=1Wm4xN9aQFeR8Bp5xpEXeZusgLG-UX4oK&sz=w1200'
   },
@@ -47,7 +48,7 @@ const classes = [
     description: '',
     abilities: [
       { name: '法師共同技能', description1: '魔利爪 攻擊傷害 40% > 110%', description2: '魔力無限 攻擊傷害+300 持續時間 40秒 > 300秒', description3: '核爆術 傷害 450% > 1200%' },
-      { name: '大魔導士(冰雷)', description1: '電閃雷鳴 攻擊次數 1次 > 4次', description2: '冰風暴 攻擊次數1次 > 4次', description3: '閃電連擊 攻擊傷害180% > 280% 攻擊次數 1次 > 8次', description4: '暴風雪 攻擊次數 1次 > 2次' },
+      { name: '職業技能', description1: '電閃雷鳴 攻擊次數 1次 > 4次', description2: '冰風暴 攻擊次數1次 > 4次', description3: '閃電連擊 攻擊傷害180% > 280% 攻擊次數 1次 > 8次', description4: '暴風雪 攻擊次數 1次 > 2次' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=1Wm4xN9aQFeR8Bp5xpEXeZusgLG-UX4oK&sz=w1200'
   },
@@ -57,7 +58,7 @@ const classes = [
     description: '',
     abilities: [
       { name: '法師共同技能', description1: '魔利爪 攻擊傷害 40% > 110%', description2: '魔力無限 攻擊傷害+300 持續時間 40秒 > 300秒', description3: '核爆術 傷害 450% > 1200%' },
-      { name: '大魔導士(火毒)', description1: '火焰箭 攻擊次數 1次 > 3次', description2: '末日烈焰 攻擊次數 1次 > 4次', description3: '劇毒麻痺 攻擊傷害 210% > 650% 攻擊次數 1次  > 3次', description4: '火流星 攻擊次數 1次 > 2次' },
+      { name: '職業技能', description1: '火焰箭 攻擊次數 1次 > 3次', description2: '末日烈焰 攻擊次數 1次 > 4次', description3: '劇毒麻痺 攻擊傷害 210% > 650% 攻擊次數 1次  > 3次', description4: '火流星 攻擊次數 1次 > 2次' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=1Wm4xN9aQFeR8Bp5xpEXeZusgLG-UX4oK&sz=w1200'
   },
@@ -66,7 +67,7 @@ const classes = [
     title: '神射手',
     description: '',
     abilities: [
-      { name: '神射手', description1: '升龍弩 攻擊次數 1次 > 2次', description2: '四連箭 傷害 100% > 200%' },
+      { name: '職業技能', description1: '升龍弩 攻擊次數 1次 > 2次', description2: '四連箭 傷害 100% > 200%' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=1wXmT6Fid6uCe1LGJ1eb2-UzQGTnmpCfC&sz=w1200'
   },
@@ -75,7 +76,7 @@ const classes = [
     title: '箭神',
     description: '',
     abilities: [
-      { name: '箭神', description1: '箭雨 攻擊次數 1次 > 2次', description2: '暴風神射 傷害 100% > 160% 攻擊次數 1次 > 2次' },
+      { name: '職業技能', description1: '箭雨 攻擊次數 1次 > 2次', description2: '暴風神射 傷害 100% > 160% 攻擊次數 1次 > 2次' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=1wXmT6Fid6uCe1LGJ1eb2-UzQGTnmpCfC&sz=w1200'
   },
@@ -84,7 +85,7 @@ const classes = [
     title: '夜使者',
     description: '',
     abilities: [
-      { name: '夜使者', description1: '無形鏢 持續時間 120秒 > 300秒', description2: '三飛閃(改) 傷害 150% > 200% 攻擊次數 3次 > 5次' },
+      { name: '職業技能', description1: '無形鏢 持續時間 120秒 > 300秒', description2: '三飛閃(改) 傷害 150% > 200% 攻擊次數 3次 > 5次' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=16Fla_DCn7fApULeUUd21uE0kRllcnr-f&sz=w1200'
   },
@@ -93,7 +94,7 @@ const classes = [
     title: '暗影神偷',
     description: '',
     abilities: [
-      { name: '暗影神偷', description1: '迴旋斬 攻擊次數 6次 > 8次 、傷害 80% > 300%', description2: '煙幕彈 冷卻時間 10分鐘 > 2分鐘', description3: '瞬步連擊 攻擊次數 2次 > 3次' },
+      { name: '職業技能', description1: '迴旋斬 攻擊次數 6次 > 8次 、傷害 80% > 300%', description2: '煙幕彈 冷卻時間 10分鐘 > 2分鐘', description3: '瞬步連擊 攻擊次數 2次 > 3次' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=16Fla_DCn7fApULeUUd21uE0kRllcnr-f&sz=w1200'
   },
@@ -103,7 +104,7 @@ const classes = [
     description: '',
     abilities: [
       { name: '海盜共同技能', description1: '部分技能延遲降低' },
-      { name: '槍神', description1: '海鷗特戰隊 攻擊怪物數量 6隻 > 8隻  冷卻時間 5秒 > 1秒 攻擊次數 1次 > 2次', description2: '海盜加農炮 攻擊次數 4次 > 5次' },
+      { name: '職業技能', description1: '海鷗特戰隊 攻擊怪物數量 6隻 > 8隻  冷卻時間 5秒 > 1秒 攻擊次數 1次 > 2次', description2: '海盜加農炮 攻擊次數 4次 > 5次' },
 
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=1YxMATNNkoMbya9Kzlt3cO0_DtdgsErjx&sz=w1200'
@@ -114,7 +115,7 @@ const classes = [
     description: '',
     abilities: [
       { name: '海盜共同技能', description1: '部分技能延遲降低' },
-      { name: '拳霸', description1: '增加周圍友方單位攻擊力', description2: '閃．連殺 攻擊傷害 230% > 350%', description3: '閃．爆破 攻擊傷害 400% > 700%', description4: '鬥神降世 持續時間調整為120秒 > 180秒', description5: '龍神降臨 攻擊次數 1次 > 2次' },
+      { name: '職業技能', description1: '增加周圍友方單位攻擊力', description2: '閃．連殺 攻擊傷害 230% > 350%', description3: '閃．爆破 攻擊傷害 400% > 700%', description4: '鬥神降世 持續時間調整為120秒 > 180秒', description5: '龍神降臨 攻擊次數 1次 > 2次' },
 
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=1KwtcP9KtkHFBnelfOY0PDhc_A4rj3zlF&sz=w1200'
@@ -124,7 +125,7 @@ const classes = [
     title: '狂狼勇士',
     description: '',
     abilities: [
-      { name: '目前待技改' },
+      { name: '職業技能', description1: '待修改' },
     ],
     imagePath: 'https://drive.google.com/thumbnail?id=1oegtlXo9BwGVuTzOCY1BAlvaOtXwHzd0&sz=w1200'
   }
@@ -141,25 +142,19 @@ const setActiveClass = (characterClass: typeof classes[0]) => {
   <section class="section skill-adjustment">
     <div class="container">
       <h2 class="section-title">技能調整</h2>
-      
+
       <div class="class-tabs">
-        <button 
-          v-for="characterClass in classes" 
-          :key="characterClass.id"
-          class="class-tab" 
-          :class="{ active: activeClass.id === characterClass.id }"
-          @click="setActiveClass(characterClass)"
-        >
+        <button v-for="characterClass in classes" :key="characterClass.id" class="class-tab"
+          :class="{ active: activeClass.id === characterClass.id }" @click="setActiveClass(characterClass)">
           {{ characterClass.title }}
         </button>
       </div>
-      
-      <ClassItem 
-        :title="activeClass.title"
-        :abilities="activeClass.abilities"
-        :description="activeClass.description || ''"
-        :image-path="activeClass.imagePath"
-      />
+
+      <TransitionExpand>
+        <ClassItem :key="activeClass.id" :title="activeClass.title" :abilities="activeClass.abilities"
+          :description="activeClass.description || ''" :image-path="activeClass.imagePath" />
+      </TransitionExpand>
+
     </div>
   </section>
 </template>
@@ -181,27 +176,32 @@ const setActiveClass = (characterClass: typeof classes[0]) => {
   flex-wrap: nowrap;
   -webkit-overflow-scrolling: touch;
   padding-bottom: var(--space-2);
-  
+
   /* Firefox 滾動條樣式 */
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
-  
+
   /* Webkit 瀏覽器滾動條樣式 (Chrome, Safari, Edge等) */
   &::-webkit-scrollbar {
-    height: 6px; /* 水平滾動條的高度 */
+    height: 6px;
+    /* 水平滾動條的高度 */
   }
-  
+
   &::-webkit-scrollbar-track {
-    background: transparent; /* 滾動條軌道背景透明 */
+    background: transparent;
+    /* 滾動條軌道背景透明 */
   }
-  
+
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.1); /* 淺灰色半透明滑塊 */
-    border-radius: 6px; /* 圓角滑塊 */
+    background-color: rgba(0, 0, 0, 0.1);
+    /* 淺灰色半透明滑塊 */
+    border-radius: 6px;
+    /* 圓角滑塊 */
   }
-  
+
   &::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.2); /* 懸停時稍微深一點 */
+    background-color: rgba(0, 0, 0, 0.2);
+    /* 懸停時稍微深一點 */
   }
 }
 
@@ -215,7 +215,8 @@ const setActiveClass = (characterClass: typeof classes[0]) => {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  flex-shrink: 0;  /* 防止選項被壓縮 */
+  flex-shrink: 0;
+  /* 防止選項被壓縮 */
 }
 
 .class-tab:hover {
@@ -233,12 +234,15 @@ const setActiveClass = (characterClass: typeof classes[0]) => {
 
 @media (max-width: 768px) {
   .class-tabs {
-    justify-content: flex-start;  /* 在小螢幕上保持左對齊 */
+    justify-content: flex-start;
+    /* 在小螢幕上保持左對齊 */
   }
-  
+
   .class-tab {
-    width: auto;  /* 取消固定寬度限制 */
-    max-width: none;  /* 移除最大寬度限制 */
+    width: auto;
+    /* 取消固定寬度限制 */
+    max-width: none;
+    /* 移除最大寬度限制 */
   }
 }
 </style>
