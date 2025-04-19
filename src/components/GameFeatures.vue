@@ -55,6 +55,7 @@ const setActiveFeature = (feature: typeof features[0]) => {
       </div>
       
       <FeatureItem 
+        class="feature-item"
         :title="activeFeature.title"
         :description="activeFeature.description"
         :image-path="activeFeature.imagePath"
@@ -67,7 +68,8 @@ const setActiveFeature = (feature: typeof features[0]) => {
 .game-features {
   background-color: var(--neutral-800);
   color: var(--text-light);
-  min-height: 600px;
+  position: relative;
+
 }
 
 .section-title {
@@ -110,6 +112,7 @@ const setActiveFeature = (feature: typeof features[0]) => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+
 @media (max-width: 768px) {
   .features-tabs {
     flex-direction: column;
@@ -121,5 +124,17 @@ const setActiveFeature = (feature: typeof features[0]) => {
     max-width: 300px;
     text-align: center;
   }
+}
+
+@media (min-width: 768px) {
+  .feature-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 }
 </style>

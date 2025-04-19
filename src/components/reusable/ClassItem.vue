@@ -20,7 +20,6 @@ defineProps<{
           (event.target as HTMLImageElement).parentElement!.classList.add('image-error');
         }" 
       />
-      <div class="image-placeholder" :title="title"></div>
     </div>
     <div class="class-content">
       <h3>{{ title }}</h3>
@@ -62,11 +61,13 @@ defineProps<{
 }
 
 .class-img {
-  width: 100%;
-  height: 100%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 8px;
-  display: block;
+  border-radius: 30px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .image-placeholder {
@@ -188,23 +189,22 @@ defineProps<{
     object-fit: cover;
     object-fit: fill;
     border-radius: 8px;
-    display: block;
 }
-  .class-image {
-    height: 400px;
-  }
 }
 
 @media (min-width: 768px) {
   .class-img {
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .class-image {
-    height: 520px;
+    height: 400px;
   }
 
   .class-item {

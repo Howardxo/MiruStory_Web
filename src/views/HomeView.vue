@@ -11,8 +11,8 @@ import TheFooter from '../components/TheFooter.vue';
     <TheHeader />
     <main>
       <GameIntention />
-      <GameFeatures />
-      <SkillAdjustment />
+      <GameFeatures class="game-features" />
+      <SkillAdjustment class="skill-adjustment" />
     </main>
     <TheFooter />
   </div>
@@ -28,4 +28,11 @@ import TheFooter from '../components/TheFooter.vue';
 main {
   flex: 1;
 }
+
+@media (min-width: 768px) {
+  .game-features {
+    height: 800px;
+  }
+}
+
 </style>

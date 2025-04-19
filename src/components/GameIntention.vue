@@ -13,7 +13,7 @@
         </div>
         <div class="intention-text">
           <p>
-            建置中!
+            遊玩系統還在完善中!
           </p>
         </div>
       </div>
@@ -39,9 +39,22 @@
   width: 100%;
 }
 
+.game-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
 .intention-text {
   flex: 1;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
 }
 
 .intention-text p {

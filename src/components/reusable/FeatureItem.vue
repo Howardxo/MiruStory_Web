@@ -18,7 +18,7 @@ defineProps<{
           (event.target as HTMLImageElement).parentElement!.classList.add('image-error');
         }" 
       />
-      <div class="image-placeholder" :title="title"></div>
+
     </div>
     <div class="feature-content">
       <h3>{{ title }}</h3>
@@ -31,12 +31,12 @@ defineProps<{
 .feature-item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-10);
   animation: fadeIn 0.5s ease-out;
 }
 
 .feature-image {
-  flex: 1;
+  flex: 3;
 }
 
 .feature-img {
@@ -44,7 +44,9 @@ defineProps<{
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .feature-content {
@@ -89,6 +91,7 @@ defineProps<{
   line-height: 1.6;
   margin-bottom: var(--space-3);
   color: var(--neutral-300);
+  width: 300px;
 }
 
 .learn-more-btn {
