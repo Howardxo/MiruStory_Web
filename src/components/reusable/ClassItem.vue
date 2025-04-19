@@ -1,10 +1,11 @@
 <script setup lang="ts">
 defineProps<{
   title: string;
-  description: { type: String, default: '' }, // 設為可選並提供默認值
+  description: string;  // 改為純字符串類型
   abilities: Array<{ name: string; description1?: string; description2?: string; description3?: string; description4?: string; description5?: string; description6?: string; description7?: string }>;
   imagePath: string;
 }>();
+
 </script>
 
 <template>

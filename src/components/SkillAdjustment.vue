@@ -7,6 +7,7 @@ const classes = [
   {
     id: 'warrior',
     title: '戰士',
+    description: '',
     abilities: [
     { name: '英雄', description1: '格檔 機率 90%  > 100%', description2: '鬥氣爆發 額外+26攻擊 > 150攻擊', description3: '無雙劍舞 傷害 260% > 600% 攻擊次數 2 次> 3次' },
       { name: '聖騎士', description1: '騎士衝擊波 攻擊次數 1次 > 3次  攻擊怪物數量 1隻 > 3隻', description2: '格檔  可以提供隊友效果' },
@@ -17,6 +18,7 @@ const classes = [
   {
     id: 'mage',
     title: '法師',
+    description: '',
     abilities: [
       { name: '共同技能', description1: '魔利爪 攻擊傷害 40% > 110%', description2: '魔力無限 攻擊傷害+300 持續時間 40秒 > 300秒', description3: '核爆術 傷害 450% > 1200%' },
       { name: '主教', description1: '聖光 攻擊次數 1次 > 4次', description2: '復甦之光 冷卻時間 30分鐘 > 5分鐘', description3: '天使之箭 攻擊次數 1次 > 3次  攻擊傷害 240% > 500%', description4: '神聖祈禱 持續時間調至120秒 > 600秒', description5: '聖盾護鎧 等卻時間減至120秒 > 60秒', description6: '神聖之光 可以提供隊友效果', description7: '天怒 攻擊次數 1次 > 2次' },
@@ -28,6 +30,7 @@ const classes = [
   {
     id: 'archer',
     title: '弓箭手',
+    description: '',
     abilities: [
       { name: '神射手', description1: '升龍弩 攻擊次數 1次 > 2次', description2: '四連箭 傷害 100% > 200%' },
       { name: '箭神', description1: '箭雨 攻擊次數 1次 > 2次', description2: '暴風神射 傷害 100% > 160% 攻擊次數 1次 > 2次' },
@@ -37,6 +40,7 @@ const classes = [
   {
     id: 'thief',
     title: '盜賊',
+    description: '',
     abilities: [
       { name: '夜使者', description1: '無形鏢 持續時間 120秒 > 300秒', description2: '三飛閃(改) 傷害 150% > 200% 攻擊次數 3次 > 5次' },
       { name: '暗影神偷', description1: '迴旋斬 攻擊次數 6次 > 8次 、傷害 80% > 300%', description2: '煙幕彈 冷卻時間 10分鐘 > 2分鐘', description3: '瞬步連擊 攻擊次數 2次 > 3次' },
@@ -46,6 +50,7 @@ const classes = [
   {
     id: 'pirate',
     title: '海盜',
+    description: '',
     abilities: [
       { name: '共同技能', description1: '部分技能延遲降低' },
       { name: '拳霸', description1: '增加周圍友方單位攻擊力', description2: '閃．連殺 攻擊傷害 230% > 350%', description3: '閃．爆破 攻擊傷害 400% > 700%', description4: '鬥神降世 持續時間調整為120秒 > 180秒', description5: '龍神降臨 攻擊次數 1次 > 2次' },
@@ -57,6 +62,7 @@ const classes = [
   {
     id: 'crazy-warrior',
     title: '狂郎勇士',
+    description: '',
     abilities: [
       { name: '目前待技改' },
     ],
@@ -90,8 +96,8 @@ const setActiveClass = (characterClass: typeof classes[0]) => {
       
       <ClassItem 
         :title="activeClass.title"
-        :description="activeClass.description || ''"
         :abilities="activeClass.abilities"
+        :description="activeClass.description || ''"
         :image-path="activeClass.imagePath"
       />
     </div>
