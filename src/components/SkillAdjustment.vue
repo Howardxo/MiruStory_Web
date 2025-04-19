@@ -173,11 +173,38 @@ const setActiveClass = (characterClass: typeof classes[0]) => {
 
 .class-tabs {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--space-2);
   margin-bottom: var(--space-4);
+  overflow-x: auto;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--space-2);
+  
+  /* Firefox 滾動條樣式 */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+  
+  /* Webkit 瀏覽器滾動條樣式 (Chrome, Safari, Edge等) */
+  &::-webkit-scrollbar {
+    height: 6px; /* 水平滾動條的高度 */
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent; /* 滾動條軌道背景透明 */
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1); /* 淺灰色半透明滑塊 */
+    border-radius: 6px; /* 圓角滑塊 */
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.2); /* 懸停時稍微深一點 */
+  }
 }
+
 
 .class-tab {
   background-color: var(--neutral-100);
@@ -188,6 +215,7 @@ const setActiveClass = (characterClass: typeof classes[0]) => {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex-shrink: 0;  /* 防止選項被壓縮 */
 }
 
 .class-tab:hover {
@@ -205,14 +233,12 @@ const setActiveClass = (characterClass: typeof classes[0]) => {
 
 @media (max-width: 768px) {
   .class-tabs {
-    flex-direction: column;
-    align-items: center;
+    justify-content: flex-start;  /* 在小螢幕上保持左對齊 */
   }
   
   .class-tab {
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
+    width: auto;  /* 取消固定寬度限制 */
+    max-width: none;  /* 移除最大寬度限制 */
   }
 }
 </style>
