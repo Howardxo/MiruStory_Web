@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 // No props or state needed for this component
 </script>
 
@@ -9,7 +9,8 @@
       <div class="header-text">
         <h1>加入我們一起來當冒險者吧!</h1>
         <p>探索這個奇幻世界!</p>
-        <button class="download-btn" onclick="window.open('https://drive.google.com/uc?export=download&id=1dhTjI67jDIm8vwdIKeIGVdzctbi6PM5d', '_blank')">下載遊戲</button>
+        <button class="download-btn"
+          onclick="window.open('https://drive.google.com/uc?export=download&id=1dhTjI67jDIm8vwdIKeIGVdzctbi6PM5d', '_blank')">下載遊戲</button>
       </div>
     </div>
   </header>
@@ -87,6 +88,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -97,6 +99,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -107,11 +110,11 @@
   .header-text h1 {
     font-size: 2.2rem;
   }
-  
+
   .header-text p {
     font-size: 1rem;
   }
-  
+
   .logo {
     font-size: 2rem;
   }

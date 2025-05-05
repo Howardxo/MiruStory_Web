@@ -1,0 +1,26 @@
+[
+    {
+        "id": "spark-blessing",
+        "title": "星火祝福",
+        "description": "將裝備放在星火上,為你的角色帶來祝福,增加裝備的能力和威力,讓你在戰鬥中成為一名強大的勇士!",
+        "imagePath": "https://drive.google.com/thumbnail?id=1pnPoIVQ8bYwlLdrtZaL1_jB_6gFv84dE&sz=w1200"
+    },
+    {
+        "id": "equipment-enchanting",
+        "title": "點裝附魔",
+        "description": "再點裝使用寶石的能量,增加裝備的能力和威力,讓你在戰鬥中成為一名強大的勇士!",
+        "imagePath": "https://drive.google.com/thumbnail?id=1YQNNXRmzhL6oXRuRJOAXhKz6711OzkKU&sz=w1200"
+    },
+    {
+        "id": "equipment-synthesis",
+        "title": "騎寵覺醒",
+        "description": "使用覺醒石，讓你騎寵夥伴激發出來!",
+        "imagePath": "https://drive.google.com/thumbnail?id=1jiY1_PNzxVBAtwCVQWb1n412B3dhPndd&sz=w1200"
+    },
+    {
+        "id": "mount-awakening",
+        "title": "裝備合成",
+        "description": "各式裝備合成與進階，提升冒險者實力!",
+        "imagePath": "https://drive.google.com/thumbnail?id=1mLGT9EITrYfgFNom9OUxoY0ATMiSsyBh&sz=w1200"
+    }
+]
