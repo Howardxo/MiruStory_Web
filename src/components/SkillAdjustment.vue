@@ -1,18 +1,25 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import ClassItem from '../components/reusable/ClassItem.vue';
 import TransitionExpand from '../components/TransitionExpand.vue';
-import jobData from '../data/job.json'; // 直接導入JSON文件
+import jobData from '../data/job.json';
 
 // 使用ref建立響應式數據
 const classes = ref([]);
-const activeClass = ref(null);
+const activeClassIndex = ref(0); // 使用索引而不是對象
+const previousIndex = ref(0); // 追蹤前一個索引
 const loading = ref(true);
 const error = ref(null);
 
+// 計算當前選中的職業
+const activeClass = computed(() =>
+  activeClassIndex.value !== null ? classes.value[activeClassIndex.value] : null
+);
+
 // 設置當前選中的職業
-const setActiveClass = (characterClass) => {
-  activeClass.value = characterClass;
+const setActiveClass = (index) => {
+  previousIndex.value = activeClassIndex.value;
+  activeClassIndex.value = index;
 };
 
 // 組件掛載時直接設置數據
@@ -20,11 +27,12 @@ onMounted(() => {
   try {
     classes.value = jobData;
     if (jobData.length > 0) {
-      activeClass.value = jobData[0];
+      activeClassIndex.value = 0;
+      previousIndex.value = 0;
     }
     loading.value = false;
   } catch (e) {
-    error.value = e.message;
+    error.value = e?.message || "未知錯誤";
     loading.value = false;
     console.error('獲取職業數據時出錯:', e);
   }
@@ -40,15 +48,16 @@ onMounted(() => {
       <div v-else-if="error" class="error">加載數據時出錯: {{ error }}</div>
       <div v-else>
         <div class="class-tabs">
-          <button v-for="characterClass in classes" :key="characterClass.id" class="class-tab"
-            :class="{ active: activeClass.id === characterClass.id }" @click="setActiveClass(characterClass)">
+          <button v-for="(characterClass, index) in classes" :key="characterClass.id" class="class-tab"
+            :class="{ active: activeClassIndex === index }" @click="setActiveClass(index)">
             {{ characterClass.title }}
           </button>
         </div>
 
-        <TransitionExpand v-if="activeClass">
-          <ClassItem :key="activeClass.id" :title="activeClass.title" :abilities="activeClass.abilities"
-            :description="activeClass.description || ''" :image-path="activeClass.imagePath" />
+        <TransitionExpand :active-index="activeClassIndex">
+          <ClassItem v-if="activeClass" :key="activeClass.id" :title="activeClass.title"
+            :abilities="activeClass.abilities" :description="activeClass.description || ''"
+            :image-path="activeClass.imagePath" />
         </TransitionExpand>
       </div>
     </div>
@@ -56,6 +65,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.container {
+  padding: 8px;
+}
+
 .skill-adjustment {
   background-color: var(--bg-light);
   color: var(--text-dark);

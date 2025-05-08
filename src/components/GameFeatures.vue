@@ -1,18 +1,24 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import FeatureItem from './reusable/FeatureItem.vue';
 import TransitionExpand from './TransitionExpand.vue';
-import featuresData from '../data/features.json'; // 使用相對路徑，避免別名問題
+import featuresData from '../data/features.json';
 
-// 使用ref建立響應式數據
 const features = ref([]);
-const activeFeature = ref(null);
+const activeFeatureIndex = ref(0); // 使用索引而不是對象
+const previousIndex = ref(0); // 追蹤前一個索引
 const loading = ref(true);
 const error = ref(null);
 
+// 計算當前選中的特色
+const activeFeature = computed(() =>
+  activeFeatureIndex.value !== null ? features.value[activeFeatureIndex.value] : null
+);
+
 // 設置當前選中的特色
-const setActiveFeature = (feature) => {
-  activeFeature.value = feature;
+const setActiveFeature = (index) => {
+  previousIndex.value = activeFeatureIndex.value;
+  activeFeatureIndex.value = index;
 };
 
 // 組件掛載時設置數據
@@ -20,7 +26,8 @@ onMounted(() => {
   try {
     features.value = featuresData;
     if (featuresData.length > 0) {
-      activeFeature.value = featuresData[0];
+      activeFeatureIndex.value = 0;
+      previousIndex.value = 0;
     }
     loading.value = false;
   } catch (e) {
@@ -40,14 +47,14 @@ onMounted(() => {
       <div v-else-if="error" class="error">加載數據時出錯: {{ error }}</div>
       <div v-else>
         <div class="features-tabs">
-          <button v-for="feature in features" :key="feature.id" class="feature-tab"
-            :class="{ active: activeFeature?.id === feature.id }" @click="setActiveFeature(feature)">
+          <button v-for="(feature, index) in features" :key="feature.id" class="feature-tab"
+            :class="{ active: activeFeatureIndex === index }" @click="setActiveFeature(index)">
             {{ feature.title }}
           </button>
         </div>
 
-        <TransitionExpand v-if="activeFeature">
-          <FeatureItem :key="activeFeature.id" class="feature-item" :title="activeFeature.title"
+        <TransitionExpand :active-index="activeFeatureIndex">
+          <FeatureItem v-if="activeFeature" :key="activeFeature.id" class="feature-item" :title="activeFeature.title"
             :description="activeFeature.description" :image-path="activeFeature.imagePath" />
         </TransitionExpand>
       </div>
@@ -140,6 +147,14 @@ onMounted(() => {
     max-width: none;
     text-align: center;
   }
+
+  .game-features {
+    height: 900px;
+  }
+
+  .feature-item {
+    gap: var(--space-16);
+  }
 }
 
 @media (min-width: 768px) {
@@ -154,7 +169,7 @@ onMounted(() => {
   }
 
   .game-features {
-    height: auto;
+    height: 700px;
   }
 }
 </style>
