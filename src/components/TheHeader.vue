@@ -25,7 +25,7 @@
   justify-content: center;
   text-align: center;
   color: white;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('冒險者公會.png');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../冒險者公會.png');
   background-size: cover;
   background-position: center;
 }
@@ -43,7 +43,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(LOGO去背.png);
+  background: url(../LOGO去背.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
