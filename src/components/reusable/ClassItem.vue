@@ -1,41 +1,38 @@
-<script setup lang="ts">
-defineProps<{
-  title: string;
-  description: string;  // 改為純字符串類型
-  abilities: Array<{ name: string; description1?: string; description2?: string; description3?: string; description4?: string; description5?: string; description6?: string; description7?: string }>;
-  imagePath: string;
-}>();
-
+<script setup>
+defineProps({
+  title: String,
+  description: String,
+  abilities: {
+    type: Array,
+    default: () => [],
+  },
+  imagePath: String,
+});
 </script>
 
 <template>
   <div class="class-item">
     <div class="class-image">
-      <img 
-        :src="imagePath" 
-        :alt="title + '職業'" 
-        class="class-img"
-        @error="(event) => { 
-          (event.target as HTMLImageElement).style.display = 'none';
-          (event.target as HTMLImageElement).parentElement!.classList.add('image-error');
-        }" 
-      />
+      <img :src="imagePath" :alt="title + '職業'" class="class-img" @error="(event) => {
+        event.target.style.display = 'none';
+        event.target.parentElement.classList.add('image-error');
+      }" />
     </div>
     <div class="class-content">
       <h3>{{ title }}</h3>
       <p>{{ description }}</p>
-      
+
       <div class="abilities">
         <ul>
           <li v-for="(ability, index) in abilities" :key="index" class="ability-item">
             <div class="ability-name">{{ ability.name }}</div>
-            <div class="ability-description">{{ ability.description1 }}</div>
-            <div class="ability-description">{{ ability.description2 }}</div>
-            <div class="ability-description">{{ ability.description3 }}</div>
-            <div class="ability-description">{{ ability.description4 }}</div>
-            <div class="ability-description">{{ ability.description5 }}</div>
-            <div class="ability-description">{{ ability.description6 }}</div>
-            <div class="ability-description">{{ ability.description7 }}</div>
+            <div class="ability-description" v-if="ability.description1">{{ ability.description1 }}</div>
+            <div class="ability-description" v-if="ability.description2">{{ ability.description2 }}</div>
+            <div class="ability-description" v-if="ability.description3">{{ ability.description3 }}</div>
+            <div class="ability-description" v-if="ability.description4">{{ ability.description4 }}</div>
+            <div class="ability-description" v-if="ability.description5">{{ ability.description5 }}</div>
+            <div class="ability-description" v-if="ability.description6">{{ ability.description6 }}</div>
+            <div class="ability-description" v-if="ability.description7">{{ ability.description7 }}</div>
           </li>
         </ul>
       </div>
@@ -176,6 +173,7 @@ defineProps<{
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -189,7 +187,7 @@ defineProps<{
     object-fit: cover;
     object-fit: fill;
     border-radius: 8px;
-}
+  }
 }
 
 @media (min-width: 768px) {
@@ -211,8 +209,8 @@ defineProps<{
     flex-direction: row;
     align-items: center;
   }
-  
-  .class-image, 
+
+  .class-image,
   .class-content {
     width: 48%;
   }

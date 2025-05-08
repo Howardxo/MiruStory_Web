@@ -1,25 +1,20 @@
-<script setup lang="ts">
-defineProps<{
-  title: string;
-  description: string;
-  imagePath: string;
-}>();
+<script setup>
+const props = defineProps({
+  title: String,
+  description: String,
+  imagePath: String
+});
 </script>
 
 <template>
   <div class="feature-item">
-      <img 
-        :src="imagePath" 
-        :alt="title" 
-        class="feature-img"
-        @error="(event) => { 
-          (event.target as HTMLImageElement).style.display = 'none';
-          (event.target as HTMLImageElement).parentElement!.classList.add('image-error');
-        }" 
-      />
+    <img :src="props.imagePath" :alt="props.title" class="feature-img" @error="(event) => {
+      event.target.style.display = 'none';
+      event.target.parentElement.classList.add('image-error');
+    }" />
     <div class="feature-content">
-      <h3>{{ title }}</h3>
-      <p>{{ description }}</p>
+      <h3>{{ props.title }}</h3>
+      <p>{{ props.description }}</p>
     </div>
   </div>
 </template>
@@ -77,6 +72,7 @@ defineProps<{
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -87,6 +83,7 @@ defineProps<{
   .feature-img {
     width: 60%;
   }
+
   .feature-item {
     gap: var(--space-8);
   }
@@ -98,16 +95,15 @@ defineProps<{
     align-items: center;
     gap: var(--space-8);
   }
+
   .feature-img {
     width: 100%;
   }
+}
 
 @media (max-width: 320px) {
   .feature-img {
     width: 100%;
   }
 }
-}
-
-
 </style>

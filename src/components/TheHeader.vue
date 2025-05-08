@@ -1,11 +1,10 @@
 <script setup>
-// No props or state needed for this component
 </script>
 
 <template>
   <header class="header">
     <div class="header-content container">
-      <img src="https://drive.google.com/thumbnail?id=1Ukgb-X-zEYv8stRMeVr-35BA5CfYHny7&sz=w1200" class="logo" />
+      <div class="logo" />
       <div class="header-text">
         <h1>加入我們一起來當冒險者吧!</h1>
         <p>探索這個奇幻世界!</p>
@@ -26,7 +25,7 @@
   justify-content: center;
   text-align: center;
   color: white;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://drive.google.com/thumbnail?id=1Xg3IKMPFENCmDQkYz3E2TBRbwQ1I41L5&sz=w1200');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('冒險者公會.png');
   background-size: cover;
   background-position: center;
 }
@@ -44,6 +43,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: url(LOGO去背.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .header-text {

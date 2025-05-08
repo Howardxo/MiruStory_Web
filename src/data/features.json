@@ -2,49 +2,49 @@
     {
         "id": "equipment-strengthening",
         "title": "能力強化",
-        "description": "將裝備放在星火上,為你的角色帶來祝福,增加裝備的能力和威力,讓你在戰鬥中成為一名強大的勇士!",
-        "imagePath": "https://drive.google.com/thumbnail?id=1pnPoIVQ8bYwlLdrtZaL1_jB_6gFv84dE&sz=w1200"
+        "description": "冒險者可向菈比獲取委託內容，收集相應數量的道具來獲取能力點數提升屬性!",
+        "imagePath": "能力強化.png"
     },
     {
         "id": "equipment-upgrading",
         "title": "裝備升級",
-        "description": "各式裝備合成與進階，提升冒險者實力!",
-        "imagePath": "https://drive.google.com/thumbnail?id=1mLGT9EITrYfgFNom9OUxoY0ATMiSsyBh&sz=w1200"
+        "description": "冒險者的裝備皆可向伊森查看是否能進階升級，進一步提升角色能力!",
+        "imagePath": "裝備升級.png"
     },
     {
         "id": "equipment-enchanting",
         "title": "點裝附魔",
         "description": "再點裝使用寶石的能量,增加裝備的能力和威力,讓你在戰鬥中成為一名強大的勇士!",
-        "imagePath": "https://drive.google.com/thumbnail?id=1YQNNXRmzhL6oXRuRJOAXhKz6711OzkKU&sz=w1200"
+        "imagePath": "點裝附魔.png"
     },
     {
         "id": "mount-awakening",
         "title": "騎寵覺醒",
-        "description": "再點裝使用寶石的能量,增加裝備的能力和威力,讓你在戰鬥中成為一名強大的勇士!",
-        "imagePath": "https://drive.google.com/thumbnail?id=1YQNNXRmzhL6oXRuRJOAXhKz6711OzkKU&sz=w1200"
+        "description": "再騎寵使用魔法石的能量,覺醒騎寵夥伴的潛藏能力!",
+        "imagePath": "騎寵覺醒.png"
+    },
+    {
+        "id": "saddle-extension",
+        "title": "馬鞍點綴",
+        "description": "使用烙印石塊，可隨機對馬鞍增加或減少-2~3屬性能力，挑戰自己的極限!",
+        "imagePath": "馬鞍點綴.png"
     },
     {
         "id": "spark-blessing",
         "title": "星火祝福",
         "description": "將裝備放在星火上,為你的角色帶來祝福,增加裝備的能力和威力,讓你在戰鬥中成為一名強大的勇士!",
-        "imagePath": "https://drive.google.com/thumbnail?id=1pnPoIVQ8bYwlLdrtZaL1_jB_6gFv84dE&sz=w1200"
+        "imagePath": "星火祝福.png"
     },
     {
         "id": "fishing-system",
         "title": "釣魚系統",
-        "description": "使用覺醒石，讓你騎寵夥伴激發出來!",
-        "imagePath": "https://drive.google.com/thumbnail?id=1jiY1_PNzxVBAtwCVQWb1n412B3dhPndd&sz=w1200"
+        "description": "角色於自由市場內使用椅子時，1分鐘可垂釣一次。高機率取得鱸魚、特殊藥水、超級藥水，低機率取得神秘卷軸箱。",
+        "imagePath": "釣魚系統.png"
     },
     {
         "id": "showcase-system",
         "title": "櫥窗系統",
-        "description": "使用覺醒石，讓你騎寵夥伴激發出來!",
-        "imagePath": "https://drive.google.com/thumbnail?id=1jiY1_PNzxVBAtwCVQWb1n412B3dhPndd&sz=w1200"
-    },
-    {
-        "id": "saddle-extension",
-        "title": "馬鞍點綴",
-        "description": "使用覺醒石，讓你騎寵夥伴激發出來!",
-        "imagePath": "https://drive.google.com/thumbnail?id=1jiY1_PNzxVBAtwCVQWb1n412B3dhPndd&sz=w1200"
+        "description": "收集各種道具，獲取世界給予的祝福!",
+        "imagePath": "櫥窗系統.png"
     }
 ]
