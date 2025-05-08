@@ -8,7 +8,7 @@
       <h2 class="section-title">關於咪嚕谷</h2>
       <div class="intention-content">
         <div class="intention-image">
-          <img src="https://drive.google.com/thumbnail?id=19v9lFIU3x7B1gpySEhV8kJRnxARfdIuZ&sz=w1200" alt="關於咪嚕谷" class="game-image" />
+          <div class="game-image" />
           <div class="image-placeholder"></div>
         </div>
         <div class="intention-text">
@@ -40,11 +40,16 @@
 }
 
 .game-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 320px;
   border-radius: 8px;
-  display: block;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(../咪嚕.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .intention-text {
@@ -79,8 +84,8 @@
     flex-direction: row;
     align-items: flex-start;
   }
-  
-  .intention-image, 
+
+  .intention-image,
   .intention-text {
     max-width: 48%;
   }
