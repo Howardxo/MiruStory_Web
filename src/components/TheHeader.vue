@@ -324,7 +324,6 @@ onUnmounted(() => {
             <span class="typed-text">{{ typedText }}</span>
             <span class="cursor">|</span>
           </span>
-          <span class="text-reveal">吧!</span>
         </h1>
 
         <p class="fade-up animate-on-scroll">探索這個奇幻世界，創造屬於你的冒險故事！</p>
