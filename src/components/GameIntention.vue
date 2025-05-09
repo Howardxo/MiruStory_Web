@@ -66,6 +66,12 @@ const observeElements = () => {
   }
 };
 
+// 打開Discord
+const openDiscord = (e) => {
+  e.preventDefault();
+  window.open('https://discord.gg/wH7vNBMJNC', '_blank');
+}
+
 onMounted(() => {
   // 設置元素呈現的時間軸
   window.addEventListener('mousemove', trackMouse);
@@ -174,8 +180,9 @@ onBeforeUnmount(() => {
           </div>
 
           <div class="miru-action">
-            <button class="join-button" @mouseenter="buttonHovered = true" @mouseleave="buttonHovered = false">
-              今天就加入咪嚕谷
+            <button class="join-button" @mouseenter="buttonHovered = true" @mouseleave="buttonHovered = false"
+              @click="openDiscord">
+              現在就加入 咪嚕谷ᵛᵉʳ¹¹³ Discord
               <span class="button-glow" :class="{ 'active': buttonHovered }"></span>
               <span class="button-particles" v-if="buttonHovered"></span>
             </button>

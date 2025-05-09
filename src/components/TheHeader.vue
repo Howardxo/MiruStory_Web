@@ -172,7 +172,7 @@ const disableMagneticButton = () => {
 // 下載按鈕點擊事件
 const handleDownload = (e) => {
   e.preventDefault();
-  window.open('https://drive.google.com/uc?export=download&id=1dhTjI67jDIm8vwdIKeIGVdzctbi6PM5d', '_blank');
+  window.open('https://drive.google.com/uc?export=download&id=18SV8cqm7pzQuHN6xZqtOwSHWsjLP6LGg', '_blank');
 
   // 按鈕動畫效果
   if (downloadButtonRef.value) {
@@ -334,7 +334,6 @@ onUnmounted(() => {
               <span class="button-content">下載遊戲</span>
               <span class="button-glow"></span>
               <span class="button-particles"></span>
-              <i class="download-icon">⬇</i>
             </button>
           </div>
         </div>
