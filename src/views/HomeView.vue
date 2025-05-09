@@ -4,6 +4,7 @@ import GameIntention from '../components/GameIntention.vue';
 import GameFeatures from '../components/GameFeatures.vue';
 import SkillAdjustment from '../components/SkillAdjustment.vue';
 import TheFooter from '../components/TheFooter.vue';
+import GameParty from '../components/GameParty.vue';
 </script>
 
 <template>
@@ -13,6 +14,7 @@ import TheFooter from '../components/TheFooter.vue';
       <GameIntention />
       <GameFeatures class="game-features" />
       <SkillAdjustment class="skill-adjustment" />
+      <GameParty class="game-party" />
     </main>
     <TheFooter />
   </div>
@@ -28,5 +30,4 @@ import TheFooter from '../components/TheFooter.vue';
 main {
   flex: 1;
 }
-
 </style>
