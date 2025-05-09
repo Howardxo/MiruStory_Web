@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "gsap": "^3.13.0",
     "mirustory-game-website": "file:",
     "vue": "^3.4.38",
     "vue-animate-height": "^1.1.2",
