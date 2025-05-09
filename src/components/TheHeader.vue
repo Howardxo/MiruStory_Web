@@ -1060,6 +1060,7 @@ onUnmounted(() => {
   .header-content {
     padding: 0 15px;
     justify-content: center;
+    gap: 12px;
   }
 
   .header-text h1 {
