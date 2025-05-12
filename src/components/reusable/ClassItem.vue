@@ -17,22 +17,26 @@ defineProps({
         event.target.style.display = 'none';
         event.target.parentElement.classList.add('image-error');
       }" />
+      <div class="image-placeholder" :title="title"></div>
     </div>
     <div class="class-content">
       <h3>{{ title }}</h3>
-      <p>{{ description }}</p>
+      <p v-if="description">{{ description }}</p>
 
       <div class="abilities">
         <ul>
           <li v-for="(ability, index) in abilities" :key="index" class="ability-item">
             <div class="ability-name">{{ ability.name }}</div>
-            <div class="ability-description" v-if="ability.description1">{{ ability.description1 }}</div>
-            <div class="ability-description" v-if="ability.description2">{{ ability.description2 }}</div>
-            <div class="ability-description" v-if="ability.description3">{{ ability.description3 }}</div>
-            <div class="ability-description" v-if="ability.description4">{{ ability.description4 }}</div>
-            <div class="ability-description" v-if="ability.description5">{{ ability.description5 }}</div>
-            <div class="ability-description" v-if="ability.description6">{{ ability.description6 }}</div>
-            <div class="ability-description" v-if="ability.description7">{{ ability.description7 }}</div>
+
+            <template v-for="n in 7" :key="'desc'+n">
+              <div class="skill-item"
+                v-if="ability['description' + n] && Array.isArray(ability['description' + n]) && ability['description' + n].length > 0">
+                <div class="skill-name">{{ ability['description' + n][0] }}</div>
+                <div v-for="(effect, eIndex) in ability['description' + n].slice(1)" :key="eIndex" class="skill-effect">
+                  {{ effect }}
+                </div>
+              </div>
+            </template>
           </li>
         </ul>
       </div>
@@ -132,7 +136,7 @@ defineProps({
 }
 
 .ability-item::before {
-  content: "•";
+  content: "- ";
   position: absolute;
   left: 0;
   color: var(--primary-500);
@@ -142,13 +146,23 @@ defineProps({
 .ability-name {
   font-weight: 600;
   color: var(--primary-600);
+  margin-bottom: 0.5rem;
 }
 
-.ability-description {
+.skill-item {
+  margin-top: 0.5rem;
+  padding-left: var(--space-1);
+}
+
+.skill-name {
+  font-weight: 500;
+  color: var(--primary-500);
+}
+
+.skill-effect {
   font-size: 0.9rem;
   color: var(--neutral-600);
   margin-top: 0.2rem;
-  padding-left: var(--space-1);
 }
 
 .select-class-btn {

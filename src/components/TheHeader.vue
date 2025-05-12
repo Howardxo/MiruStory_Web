@@ -172,7 +172,7 @@ const disableMagneticButton = () => {
 // 下載按鈕點擊事件
 const handleDownload = (e) => {
   e.preventDefault();
-  window.open('https://drive.google.com/uc?export=download&id=18SV8cqm7pzQuHN6xZqtOwSHWsjLP6LGg', '_blank');
+  window.open('https://drive.google.com/uc?export=download&id=1PRXCKypNHNAN9RFX60JD7gfzo_UQxjsu', '_blank');
 
   // 按鈕動畫效果
   if (downloadButtonRef.value) {
