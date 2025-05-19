@@ -1,6 +1,46 @@
 <script setup>
 import { ref, onMounted, reactive, onBeforeUnmount } from 'vue';
 
+// 添加輪播圖數據
+const carouselImages = ref([
+  { url: '../咪嚕.png', caption: '探索咪嚕谷的奇幻世界' },
+  { url: '../咪嚕谷自由.png', caption: '封測紀錄照片' },
+  { url: '../咪嚕谷樹上1.png', caption: '封測紀錄照片' },
+  { url: '../咪嚕谷樹上2.png', caption: '封測紀錄照片' },
+  { url: '../咪嚕谷打炎.png', caption: '封測紀錄照片' }
+]);
+
+// 輪播圖控制
+const currentSlide = ref(0);
+const autoplayInterval = ref(null);
+
+// 切換輪播圖
+const nextSlide = () => {
+  currentSlide.value = (currentSlide.value + 1) % carouselImages.value.length;
+};
+
+const prevSlide = () => {
+  currentSlide.value = (currentSlide.value - 1 + carouselImages.value.length) % carouselImages.value.length;
+};
+
+const goToSlide = (index) => {
+  currentSlide.value = index;
+};
+
+// 啟動自動輪播
+const startAutoplay = () => {
+  stopAutoplay();
+  autoplayInterval.value = setInterval(nextSlide, 5000);
+};
+
+// 停止自動輪播
+const stopAutoplay = () => {
+  if (autoplayInterval.value) {
+    clearInterval(autoplayInterval.value);
+    autoplayInterval.value = null;
+  }
+};
+
 // 添加動畫控制
 const isVisible = ref(false);
 const highlightItems = ref([false, false, false]);
@@ -77,6 +117,9 @@ onMounted(() => {
   window.addEventListener('mousemove', trackMouse);
   observeElements();
 
+  // 啟動輪播圖自動播放
+  startAutoplay();
+
   // 如果元素一開始就在視口中，直接觸發動畫
   setTimeout(() => {
     if (!isVisible.value) isVisible.value = true;
@@ -99,6 +142,7 @@ onBeforeUnmount(() => {
   window.removeEventListener('mousemove', trackMouse);
   animationsActive.value = false; // 停止所有進行中的動畫
   if (mouseMoveTimeout) clearTimeout(mouseMoveTimeout);
+  stopAutoplay(); // 停止輪播圖
 });
 </script>
 
@@ -108,24 +152,50 @@ onBeforeUnmount(() => {
     <div class="container">
       <h2 class="section-title" :class="{ 'fade-in': isVisible }">關於咪嚕谷</h2>
       <div class="intention-content">
-        <!-- 左側圖片區 -->
-        <div class="intention-image" :class="{ 'slide-in': isVisible }">
-          <div class="game-image" :class="{ 'image-loaded': imageLoaded }">
-            <div class="floating-elements" :class="{ 'show': showFloatingElements }">
-              <span class="floating-element maple-leaf">🍁</span>
-              <span class="floating-element star-1">✨</span>
-              <span class="floating-element star-2">✨</span>
-              <span class="floating-element mushroom">🍄</span>
-              <span class="floating-element cloud">☁️</span>
-              <span class="floating-element heart">❤️</span>
+        <!-- 上部分 - 輪播圖 -->
+        <div class="carousel-container" :class="{ 'slide-in': isVisible }">
+          <div class="carousel-wrapper">
+            <div class="carousel-slides" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+              <div v-for="(slide, index) in carouselImages" :key="index" class="carousel-slide">
+                <div class="game-image" :style="{ backgroundImage: `url(${slide.url})` }"
+                  :class="{ 'image-loaded': imageLoaded }">
+                  <div class="floating-elements" v-if="index === 0" :class="{ 'show': showFloatingElements }">
+                    <span class="floating-element maple-leaf">🍁</span>
+                    <span class="floating-element star-1">✨</span>
+                    <span class="floating-element star-2">✨</span>
+                    <span class="floating-element mushroom">🍄</span>
+                    <span class="floating-element cloud">☁️</span>
+                    <span class="floating-element heart">❤️</span>
+                  </div>
+                  <div class="image-overlay" :class="{ 'reveal': imageLoaded }">
+                    <div class="image-caption">{{ slide.caption }}</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="image-overlay" :class="{ 'reveal': imageLoaded }">
-              <div class="image-caption">探索咪嚕谷的奇幻世界</div>
+
+            <!-- 輪播圖控制區 -->
+            <div class="carousel-controls">
+              <button class="carousel-arrow prev" @click="prevSlide" @mouseenter="stopAutoplay"
+                @mouseleave="startAutoplay">
+                &#10094;
+              </button>
+              <button class="carousel-arrow next" @click="nextSlide" @mouseenter="stopAutoplay"
+                @mouseleave="startAutoplay">
+                &#10095;
+              </button>
+            </div>
+
+            <!-- 輪播圖指示點 -->
+            <div class="carousel-dots">
+              <span v-for="(_, index) in carouselImages" :key="index" class="carousel-dot"
+                :class="{ 'active': currentSlide === index }" @click="goToSlide(index)" @mouseenter="stopAutoplay"
+                @mouseleave="startAutoplay"></span>
             </div>
           </div>
         </div>
 
-        <!-- 右側內容區 -->
+        <!-- 下部分 - 內容區 -->
         <div class="miru-container" :class="{ 'slide-in': isVisible }">
           <h1 class="miru-title typewriter" :class="{ 'typing-complete': typewriterComplete }">
             咪嚕谷 - 重溫童年，開啟全新冒險！
@@ -271,28 +341,121 @@ onBeforeUnmount(() => {
   width: 100%;
 }
 
-@media (min-width: 992px) {
-  .intention-content {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 3rem;
-  }
-}
-
-/* 左側圖片區域 */
-.intention-image {
-  flex: 1;
+/* 輪播圖樣式 */
+.carousel-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   opacity: 0;
   transform: translateY(20px);
+  margin-bottom: 1.5rem;
 }
 
-.intention-image.slide-in {
+.carousel-container.slide-in {
   animation: slideIn 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-slides {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 15px;
+  z-index: 10;
+}
+
+.carousel-arrow {
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-arrow:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: white;
+  transform: scale(1.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* 原有左側圖片區樣式修改為輪播項目樣式 */
+.game-image {
+  height: 320px;
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+  filter: brightness(0.9) saturate(0.8);
+  transform: scale(0.95);
+}
+
+.game-image.image-loaded {
+  filter: brightness(1) saturate(1.05);
+  transform: scale(1);
+}
+
+.game-image:hover {
+  background-size: 105% auto;
+  filter: brightness(1.05) saturate(1.1);
 }
 
 .floating-elements {
@@ -362,31 +525,6 @@ onBeforeUnmount(() => {
   animation-duration: 7s;
 }
 
-.game-image {
-  height: 320px;
-  width: 100%;
-  border-radius: 8px;
-  object-fit: cover;
-  background: url(../咪嚕.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
-  filter: brightness(0.9) saturate(0.8);
-  transform: scale(0.95);
-}
-
-.game-image.image-loaded {
-  filter: brightness(1) saturate(1.05);
-  transform: scale(1);
-}
-
-.game-image:hover {
-  background-size: 105% auto;
-  filter: brightness(1.05) saturate(1.1);
-}
-
 .image-overlay {
   position: absolute;
   bottom: 0;
@@ -422,11 +560,10 @@ onBeforeUnmount(() => {
   opacity: 1;
 }
 
-/* 右側內容區域 */
+/* 右側內容區域 - 調整為下方內容區 */
 .miru-container {
-  flex: 1;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   font-family: '微軟正黑體', 'PingFang TC', sans-serif;
   line-height: 1.8;
   padding: 2rem;
@@ -1189,6 +1326,16 @@ onBeforeUnmount(() => {
   .join-button {
     padding: 0.8rem 1.8rem;
     font-size: 1rem;
+  }
+
+  .carousel-controls {
+    padding: 0 10px;
+  }
+
+  .carousel-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
   }
 }
 </style>
