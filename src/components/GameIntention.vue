@@ -7,6 +7,7 @@ const carouselImages = ref([
   { url: '../咪嚕谷自由.png', caption: '封測紀錄照片' },
   { url: '../咪嚕谷樹上1.png', caption: '封測紀錄照片' },
   { url: '../咪嚕谷樹上2.png', caption: '封測紀錄照片' },
+  { url: '../咪嚕谷樹上3.png', caption: '封測紀錄照片' },
   { url: '../咪嚕谷打炎.png', caption: '封測紀錄照片' }
 ]);
 
