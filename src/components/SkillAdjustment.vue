@@ -461,7 +461,8 @@ onMounted(async () => {
   background-color: white;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   overflow: hidden;
-  min-height: 300px;
+  min-height: 500px;
+  max-height: 500px;
   transition: all 0.4s ease;
   transform: perspective(800px) rotateX(0deg);
 }
