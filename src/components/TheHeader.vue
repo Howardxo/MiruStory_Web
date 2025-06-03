@@ -494,7 +494,7 @@ onUnmounted(() => {
 .logo {
   height: 100%;
   width: 100%;
-  background: url(../LOGO去背.png);
+  background: url(../logo360.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
