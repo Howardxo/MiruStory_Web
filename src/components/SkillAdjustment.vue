@@ -10,6 +10,8 @@ const activeClassIndex = ref(0);
 const previousIndex = ref(0);
 const loading = ref(true);
 const error = ref(null);
+const contentExpanded = ref(false);
+const shouldShowToggle = ref(false);
 
 // 動畫控制
 const isVisible = ref(false);
@@ -24,16 +26,59 @@ const activeClass = computed(() =>
   activeClassIndex.value !== null ? classes.value[activeClassIndex.value] : null
 );
 
+// 檢查是否需要顯示展開按鈕
+const checkToggleNeeded = () => {
+  nextTick(() => {
+    const activeClassData = activeClass.value;
+    if (activeClassData && activeClassData.description) {
+      // 如果描述長度超過200字符，顯示展開按鈕
+      shouldShowToggle.value = activeClassData.description.length > 200;
+    } else {
+      shouldShowToggle.value = false;
+    }
+  });
+};
+
+// 切換內容展開狀態
+const toggleContentExpand = () => {
+  contentExpanded.value = !contentExpanded.value;
+  adjustContentHeight();
+};
+
+// 動態調整內容高度
+const adjustContentHeight = () => {
+  nextTick(() => {
+    const contentWrapper = document.querySelector('.class-content-wrapper');
+    if (contentWrapper) {
+      const content = contentWrapper.querySelector('.class-item');
+      if (content) {
+        if (contentExpanded.value) {
+          // 展開狀態：移除高度限制
+          contentWrapper.style.maxHeight = 'none';
+          contentWrapper.style.height = 'auto';
+        } else {
+          // 收合狀態：設置最小高度
+          const minHeight = Math.max(content.scrollHeight, 400);
+          contentWrapper.style.height = `${Math.min(minHeight, 500)}px`;
+        }
+      }
+    }
+  });
+};
+
 // 設置當前選中的職業並更新指示器
 const setActiveClass = async (index) => {
   if (index === activeClassIndex.value) return;
 
   previousIndex.value = activeClassIndex.value;
   activeClassIndex.value = index;
+  contentExpanded.value = false; // 重置展開狀態
 
   // 添加切換動畫效果
   await nextTick();
   updateTabIndicator(index);
+  checkToggleNeeded();
+  adjustContentHeight();
 
   // 為當前選中標籤添加特殊動畫
   if (classRefs.value && classRefs.value[index]) {
@@ -75,9 +120,10 @@ const observeIntersection = () => {
 
 // 初始化職業標籤效果和自動循環功能
 const initClassTabsEffects = () => {
-  // 初始化標籤指示器位置
   nextTick(() => {
     updateTabIndicator(activeClassIndex.value);
+    checkToggleNeeded();
+    adjustContentHeight();
 
     // 創建自動循環展示（可選）
     let autoChangeInterval;
@@ -85,7 +131,7 @@ const initClassTabsEffects = () => {
       autoChangeInterval = setInterval(() => {
         const nextIndex = (activeClassIndex.value + 1) % classes.value.length;
         setActiveClass(nextIndex);
-      }, 10000); // 每10秒切換一次
+      }, 10000);
     };
 
     const stopAutoChange = () => {
@@ -109,7 +155,6 @@ const initClassTabsEffects = () => {
 // 組件掛載時設置數據
 onMounted(async () => {
   try {
-    // 模擬數據加載延遲
     await new Promise(r => setTimeout(r, 300));
 
     classes.value = jobData;
@@ -119,7 +164,6 @@ onMounted(async () => {
     }
     loading.value = false;
 
-    // 設定元素引用後進行初始化
     await nextTick();
     observeIntersection();
     initClassTabsEffects();
@@ -130,6 +174,11 @@ onMounted(async () => {
     console.error('獲取職業數據時出錯:', e);
   }
 });
+
+// 監聽activeClass變化
+watch(activeClass, () => {
+  checkToggleNeeded();
+}, { immediate: true });
 </script>
 
 <template>
@@ -173,9 +222,18 @@ onMounted(async () => {
         </div>
 
         <TransitionExpand :active-index="activeClassIndex">
-          <div v-if="activeClass" :key="activeClass.id" class="class-content-wrapper">
-            <ClassItem class="class-item" :title="activeClass.title" :abilities="activeClass.abilities"
-              :description="activeClass.description || ''" :image-path="activeClass.imagePath" />
+          <div v-if="activeClass" :key="activeClass.id" class="class-content-wrapper auto-height">
+            <ClassItem class="class-item full-description" :title="activeClass.title" :abilities="activeClass.abilities"
+              :description="activeClass.description || ''" :image-path="activeClass.imagePath"
+              :show-full-description="true" :expanded="contentExpanded" @toggle-expand="toggleContentExpand" />
+
+            <!-- 展開/收合按鈕 -->
+            <div v-if="shouldShowToggle" class="content-toggle-wrapper">
+              <button @click="toggleContentExpand" class="expand-toggle-btn">
+                <span class="toggle-icon" :class="{ 'rotated': contentExpanded }">▼</span>
+                {{ contentExpanded ? '收合內容' : '展開完整內容' }}
+              </button>
+            </div>
 
             <!-- 裝飾元素 -->
             <div class="skill-decorations">
@@ -196,6 +254,7 @@ onMounted(async () => {
     </div>
   </section>
 </template>
+
 
 <style scoped>
 .skill-adjustment {
@@ -354,13 +413,10 @@ onMounted(async () => {
   -webkit-overflow-scrolling: touch;
   padding: 0.5rem;
   position: relative;
-
-  /* 自定義滾動條 */
   scrollbar-width: thin;
   scrollbar-color: var(--primary-300) transparent;
 }
 
-/* Webkit 滾動條樣式 */
 .class-tabs::-webkit-scrollbar {
   height: 5px;
   background: rgba(0, 0, 0, 0.03);
@@ -453,23 +509,117 @@ onMounted(async () => {
   transition: 0.8s;
 }
 
-/* 技能內容樣式 */
+/* 修正後的技能內容容器樣式 */
 .class-content-wrapper {
   position: relative;
   padding: 1.5rem;
   border-radius: 12px;
   background-color: white;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  min-height: 500px;
-  max-height: 500px;
+  overflow: visible;
+  /* 改為visible */
+  min-height: 400px;
+  /* 降低最小高度 */
+  height: auto;
+  /* 自動調整高度 */
+  max-height: none;
+  /* 移除最大高度限制 */
   transition: all 0.4s ease;
   transform: perspective(800px) rotateX(0deg);
+}
+
+/* 自動高度調整類別 */
+.auto-height {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
 }
 
 .class-content-wrapper:hover {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
   transform: perspective(800px) rotateX(1deg) translateY(-5px);
+}
+
+/* 完整描述顯示樣式 */
+.full-description {
+  height: auto !important;
+  max-height: none !important;
+}
+
+.full-description .description,
+.full-description .description-text,
+.full-description p {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  display: block !important;
+  max-height: none !important;
+  height: auto !important;
+  word-wrap: break-word;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* 展開/收合按鈕樣式 */
+.content-toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  border-top: 1px solid var(--neutral-200);
+  margin-top: 1.5rem;
+}
+
+.expand-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.3);
+}
+
+.expand-toggle-btn:hover {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.4);
+}
+
+.toggle-icon {
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.toggle-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* 可滾動內容樣式（可選） */
+.scrollable-content {
+  max-height: 600px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-300) transparent;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background-color: var(--primary-300);
+  border-radius: 3px;
 }
 
 /* 裝飾粒子 */
@@ -642,10 +792,25 @@ onMounted(async () => {
 
   .class-content-wrapper {
     padding: 1rem;
+    min-height: 300px;
+  }
+
+  .class-content-wrapper.auto-height {
+    min-height: 200px;
+  }
+
+  .full-description .description {
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .navigation-dots {
     margin-top: 1.5rem;
+  }
+
+  .expand-toggle-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
   }
 }
 </style>

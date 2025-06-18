@@ -172,11 +172,7 @@ const disableMagneticButton = () => {
 // 下載按鈕點擊事件
 const handleDownload = (e) => {
   e.preventDefault();
-<<<<<<< HEAD
   window.open('https://drive.usercontent.google.com/download?id=1-M0OpTj-zkz-okjoiZ5T9C75xlnZlo93&export=download&authuser=0', '_blank');
-=======
-  window.open('https://mirustory.pse.im/mirumsV2502', '_blank');
->>>>>>> de26519c081b0c53fff67b7c6785c066ce20d423
 
   // 按鈕動畫效果
   if (downloadButtonRef.value) {
